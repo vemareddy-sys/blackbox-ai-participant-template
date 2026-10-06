@@ -1,20 +1,25 @@
-# round-1 — Observe
+# Round 1 Investigation Report
 
-**Team:** BB-XXX
-**Queries used:** 0 / budget
+## What We Tested
 
-## What we concluded
+Describe the things we investigated.
 
-<!-- The short version. What is this system doing? -->
+## Observations
 
-## How we got there
+Describe exactly what happened during the experiments.
 
-<!-- The experiments that mattered, in order. Why each one was worth a query. -->
+## Findings
 
-## What we ruled out
+Explain what we discovered.
 
-<!-- Hypotheses you rejected and what killed them. This section carries real marks. -->
+## Reasoning
 
-## What we are still unsure about
+Explain how the observations led to the findings.
 
-<!-- Being honest here scores better than overclaiming. -->
+## Confidence
+
+State how confident we are and why.
+
+## Remaining Uncertainty
+
+Mention anything we could not confirm. 
