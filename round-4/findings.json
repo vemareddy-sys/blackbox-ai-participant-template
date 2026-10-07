@@ -1,18 +1,157 @@
 {
-  "round": "round-4",
-  "team": "BB-XXX",
-  "queries_used": 0,
-  "claims": [
-    {
-      "type": "feature_effect",
-      "feature": "x1",
-      "direction": "increases",
-      "strength": "strong",
-      "confidence": 0.0,
-      "evidence": {
-        "query_ids": [],
-        "summary": "Replace this example claim with your own. Every claim needs evidence."
-      }
-    }
-  ]
+"system": "GK-02 Hospital Triage System",
+"round": 4,
+"reconstruction_type": "behavioral_surrogate",
+"observations_used": 117,
+"inputs": [
+"age",
+"baseline_score",
+"comorbidity_ratio",
+"dependants",
+"prior_visits",
+"recent_admissions",
+"requested_beds",
+"vitals_index",
+"ward",
+"years_registered"
+],
+"outputs": [
+"score",
+"decision"
+],
+"claims": [
+{
+"claim": "The system produces a continuous score between 0 and 1.",
+"confidence": "high",
+"evidence": {
+"minimum_observed_score": 0.5777,
+"maximum_observed_score": 0.9791
 }
+},
+{
+"claim": "The collected observations contain both numerical inputs and a categorical ward input.",
+"confidence": "high",
+"evidence": {
+"categorical_input": "ward",
+"observed_wards": ["A", "B", "C"]
+}
+},
+{
+"claim": "Recent admissions can reduce the score.",
+"confidence": "high",
+"evidence": {
+"comparison": [
+{
+"recent_admissions": 0.8,
+"score": 0.9768
+},
+{
+"recent_admissions": 2.56,
+"score": 0.9541
+}
+]
+}
+},
+{
+"claim": "Prior visits can have a substantial effect on the score.",
+"confidence": "high",
+"evidence": {
+"observed_scores": [
+{
+"prior_visits": 20.0,
+"score": 0.9768
+},
+{
+"prior_visits": 5.8,
+"score": 0.9357
+},
+{
+"prior_visits": 2.0,
+"score": 0.7519
+}
+]
+}
+},
+{
+"claim": "Age influences the score.",
+"confidence": "high",
+"evidence": {
+"comparisons": [
+{
+"age": 75.0,
+"score": 0.9761
+},
+{
+"age": 52.485,
+"score": 0.9622
+},
+{
+"age": 18.0,
+"score": 0.9063
+}
+]
+}
+},
+{
+"claim": "The score is not adequately described by independent linear effects alone.",
+"confidence": "medium",
+"evidence": {
+"interaction_features": [
+"baseline_x_comorbidity",
+"age_x_baseline"
+]
+}
+},
+{
+"claim": "The reconstruction feature-importance analysis ranks dependants, years_registered, and comorbidity_ratio among the strongest features.",
+"confidence": "high",
+"feature_importance": {
+"dependants": 0.210889,
+"years_registered": 0.181366,
+"comorbidity_ratio": 0.140128,
+"baseline_x_comorbidity": 0.0785,
+"age_x_baseline": 0.07693,
+"ward_num": 0.061858,
+"prior_visits": 0.055033,
+"age": 0.042889
+}
+},
+{
+"claim": "The exact decision threshold between APPROVE and DECLINE cannot be determined from the supplied embedded observations.",
+"confidence": "high",
+"evidence": {
+"observed_decision_values": ["APPROVE"]
+}
+},
+{
+"claim": "The exact hidden mathematical formula has not been uniquely recovered.",
+"confidence": "high",
+"reason": "Multiple functions can explain a finite set of black-box observations."
+}
+],
+"reconstruction": {
+"approach": [
+"preserve verified observations",
+"encode ward",
+"construct interaction features",
+"train multiple tabular models",
+"compare model behavior",
+"combine models using ensemble methods"
+],
+"model_families": [
+"scikit-learn",
+"XGBoost",
+"LightGBM",
+"CatBoost",
+"weighted ensemble",
+"stacking"
+]
+},
+"limitations": [
+"limited observation coverage",
+"decision boundary not directly established",
+"exact hidden formula unknown",
+"feature importance belongs to the surrogate model",
+"extrapolation outside observed input ranges is uncertain"
+]
+} 
